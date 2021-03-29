@@ -29,7 +29,7 @@ behavior = new H.mapevents.Behavior(mapEvent);
 var ui = H.ui.UI.createDefault(map, defaultLayers, 'fr-FR');
 
 var _mapPoint = [];
-function planificationOptimise() {
+var planificationOptimise = function planificationOptimise() {
     map.addEventListener("dbltap", event => {
         var startPosition = map.screenToGeo(
             event.currentPointer.viewportX,
@@ -53,7 +53,7 @@ function drawRoute(startPosition1, endPosition1, startPosition2, endPosition2) {
     var routingParameters = {
         // The routing mode:
         'mode': 'fastest;car;traffic:enabled',
-
+   
         // The start point of the route:
         'waypoint0': 'geo!' + startPosition1 + ',' + endPosition1,
 
@@ -67,7 +67,7 @@ function drawRoute(startPosition1, endPosition1, startPosition2, endPosition2) {
     wayPoints.push(routingParameters);
     if (wayPoints.length > -1) {
         console.log(wayPoints);
-        // Define a callback function to process the routing response:
+        // Define a callback function to process the routing response: 
         var onResult = function (result) {
             var route,
                 routeShape,
@@ -94,7 +94,7 @@ function drawRoute(startPosition1, endPosition1, startPosition2, endPosition2) {
 
                 // Create a polyline to display the route:
                 var routeLine = new H.map.Polyline(linestring, {
-                    style: { strokeColor: 'blue', lineWidth: 10 }
+                    style: { strokeColor: 'blue', lineWidth: 10 }   
                 });
 
                 // Add the route polyline and the two markers to the map:
@@ -102,6 +102,10 @@ function drawRoute(startPosition1, endPosition1, startPosition2, endPosition2) {
 
                 // Set the map's viewport to make the whole route visible:
                 map.setViewBounds(routeLine.getBounds());
+
+                App.trajet.setValue(linestring);
+                
+                console.log(linestring);
             }
         };
 
@@ -119,7 +123,7 @@ function drawRoute(startPosition1, endPosition1, startPosition2, endPosition2) {
 }
 
 
-function planificationManuelle() {
+var planificationManuelle = function planificationManuelle() {
     var _markers = [];
     map.addEventListener("dbltap", event => {
         var position = map.screenToGeo(
@@ -146,18 +150,32 @@ function planificationManuelle() {
 
 
 function testCheckBox() {
-    /*var test = App.pm.getValue();
-    console.log(test)
-    test.checked
-    if (test) {
-        planificationOptimise();
+    if (pm.Checked) {
+        //planificationManuelle = ""
+        pm.Checked = false
+        console.log(pm.Checked)
+        planificationOptimise   
+        
+        
+        map.removeEventListener("dbltap", planificationManuelle)
+        mapEvent = new H.mapevents.MapEvents(map);
+        behavior = new H.mapevents.Behavior(mapEvent);
+        //pm.setValue = ""
     }
-    else {
-        planificationManuelle();
-    }*/
-    console.log("good")
+    else if (!pm.Checked) {
+        //planificationOptimise = ""
+        pm.Checked = true
+        console.log(pm.Checked)
+        planificationManuelle
+        
+        
+        map.removeEventListener("dbltap", planificationOptimise)
+        mapEvent = new H.mapevents.MapEvents(map);
+        behavior = new H.mapevents.Behavior(mapEvent);
+        
+        //pm.setValue = ""
+    }
 }
-
 
 
 

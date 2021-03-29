@@ -42,31 +42,67 @@ namespace RoutesPlanning_Demo
         protected global::Ext.Net.Checkbox pm;
 
         /// <summary>
-        /// Contrôle DateField1.
+        /// Contrôle vehicule.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::Ext.Net.DateField DateField1;
+        protected global::Ext.Net.TextField vehicule;
 
         /// <summary>
-        /// Contrôle DateField2.
+        /// Contrôle dateDepart.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::Ext.Net.DateField DateField2;
+        protected global::Ext.Net.DateField dateDepart;
 
         /// <summary>
-        /// Contrôle tolerence.
+        /// Contrôle TimeField2.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::Ext.Net.TextField tolerence;
+        protected global::Ext.Net.TimeField TimeField2;
+
+        /// <summary>
+        /// Contrôle dateArivee.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::Ext.Net.DateField dateArivee;
+
+        /// <summary>
+        /// Contrôle TimeField1.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::Ext.Net.TimeField TimeField1;
+
+        /// <summary>
+        /// Contrôle txtBoxTolerence.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::Ext.Net.TextField txtBoxTolerence;
+
+        /// <summary>
+        /// Contrôle trajet.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::Ext.Net.TextField trajet;
 
         /// <summary>
         /// Contrôle btnOK.
@@ -85,5 +121,23 @@ namespace RoutesPlanning_Demo
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::Ext.Net.Button btnCancel;
+
+        /// <summary>
+        /// Contrôle GridPanel.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::Ext.Net.GridPanel GridPanel;
+
+        /// <summary>
+        /// Contrôle Store1.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::Ext.Net.Store Store1;
     }
 }
