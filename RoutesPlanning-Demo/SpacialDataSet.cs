@@ -20,6 +20,7 @@ namespace RoutesPlanning_Demo
         public Nullable<System.DateTime> dateDepart { get; set; }
         public Nullable<System.DateTime> dateArivee { get; set; }
         public System.Data.Entity.Spatial.DbGeometry trajet { get; set; }
+        public Nullable<bool> active { get; set; }
 
         public static SpacialDataSet GetSpacialDataSet(int id)
         {

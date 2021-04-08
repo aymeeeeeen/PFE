@@ -14,6 +14,7 @@
           <Property Name="dateDepart" Type="datetime" />
           <Property Name="dateArivee" Type="datetime" />
           <Property Name="trajet" Type="geometry" />
+          <Property Name="active" Type="bit" />
         </EntityType>
         <EntityContainer Name="demoDBModelStoreContainer">
           <EntitySet Name="SpacialDataSet" EntityType="Self.SpacialDataSet" Schema="dbo" store:Type="Tables" />
@@ -22,19 +23,20 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="demoDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="demoDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SpacialDataSets" EntityType="demoDBModel.SpacialDataSet" />
+        </EntityContainer>
         <EntityType Name="SpacialDataSet">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="vehicule" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="vehicule" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="dateDepart" Type="DateTime" Precision="3" />
           <Property Name="dateArivee" Type="DateTime" Precision="3" />
           <Property Name="trajet" Type="Geometry" />
+          <Property Name="active" Type="Boolean" />
         </EntityType>
-        <EntityContainer Name="demoDB" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="SpacialDataSets" EntityType="Self.SpacialDataSet" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -44,11 +46,12 @@
           <EntitySetMapping Name="SpacialDataSets">
             <EntityTypeMapping TypeName="demoDBModel.SpacialDataSet">
               <MappingFragment StoreEntitySet="SpacialDataSet">
+                <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="trajet" ColumnName="trajet" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="vehicule" ColumnName="vehicule" />
-                <ScalarProperty Name="dateDepart" ColumnName="dateDepart" />
                 <ScalarProperty Name="dateArivee" ColumnName="dateArivee" />
+                <ScalarProperty Name="dateDepart" ColumnName="dateDepart" />
+                <ScalarProperty Name="vehicule" ColumnName="vehicule" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

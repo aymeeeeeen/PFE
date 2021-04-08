@@ -60,13 +60,13 @@ namespace RoutesPlanning_Demo
         protected global::Ext.Net.DateField dateDepart;
 
         /// <summary>
-        /// Contrôle TimeField2.
+        /// Contrôle HD.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::Ext.Net.TimeField TimeField2;
+        protected global::Ext.Net.TimeField HD;
 
         /// <summary>
         /// Contrôle dateArivee.
@@ -78,13 +78,13 @@ namespace RoutesPlanning_Demo
         protected global::Ext.Net.DateField dateArivee;
 
         /// <summary>
-        /// Contrôle TimeField1.
+        /// Contrôle HA.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::Ext.Net.TimeField TimeField1;
+        protected global::Ext.Net.TimeField HA;
 
         /// <summary>
         /// Contrôle txtBoxTolerence.
@@ -103,6 +103,15 @@ namespace RoutesPlanning_Demo
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::Ext.Net.TextField trajet;
+
+        /// <summary>
+        /// Contrôle active.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::Ext.Net.TextField active;
 
         /// <summary>
         /// Contrôle btnOK.

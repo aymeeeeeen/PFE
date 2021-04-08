@@ -17,7 +17,9 @@
     <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
     <script runat="server">
         [DirectMethod]
-        public void Unchecked() { X.Call("testCheckBox"); }
+        public void Unchecked() {
+            X.Call("testCheckBox");
+        }
     </script>
     <script>
         var onKeyUp = function () {
@@ -55,12 +57,12 @@
                             </div> 
                             <ext:FormPanel ID="frmInfo" runat="server" Border="false" Frame="false" Padding="5">
                                 <Items>
-                                    <ext:Checkbox runat="server" ID="pm" BoxLabel="Plannification Optimisé" Checked="true">
+                                    <ext:Checkbox runat="server" ID="pm" BoxLabel="Plannification Manuelle">
                                         <Listeners>
-                                            <Change Handler="App.direct.Unchecked()"/>
+                                            <Change Handler="App.direct.Unchecked()" Delay="1" />
                                         </Listeners>
                                     </ext:Checkbox>
-                                    <ext:TextField runat="server" ID="vehicule" AllowBlank="false" FieldLabel="Véhicule">
+                                    <ext:TextField runat="server" ID="vehicule" FieldLabel="Véhicule">
                                     </ext:TextField>  
                                     <ext:DateField ID="dateDepart" runat="server" Vtype="daterange" FieldLabel="Date De Départ" EnableKeyEvents="true" Format="yyyy-MM-dd">  
                                         <CustomConfig>
@@ -70,7 +72,7 @@
                                             <KeyUp Fn="onKeyUp" />
                                         </Listeners>
                                     </ext:DateField>
-                                    <ext:TimeField ID="TimeField2" runat="server" FieldLabel="Heure Départ" MinTime="9:00" MaxTime="18:00" Increment="30" SelectedTime="09:00" Format="H:mm" />
+                                    <ext:TimeField ID="HD" runat="server" FieldLabel="Heure Départ" MinTime="9:00" MaxTime="18:00" Increment="30" Format="H:mm" />
                                     <ext:DateField ID="dateArivee" runat="server" Vtype="daterange" FieldLabel="Date d'Arrivée" EnableKeyEvents="true" Format="yyyy-MM-dd">    
                                         <CustomConfig>
                                             <ext:ConfigItem Name="startDateField" Value="dateDepart" Mode="Value" />
@@ -79,9 +81,10 @@
                                             <KeyUp Fn="onKeyUp" />
                                         </Listeners>
                                     </ext:DateField>
-                                    <ext:TimeField ID="TimeField1" runat="server" FieldLabel="Heure d'Arivée" MinTime="9:00" MaxTime="18:00" Increment="30" SelectedTime="09:00" Format="H:mm" />
-                                    <ext:TextField runat="server" ID="txtBoxTolerence" AllowBlank="false" FieldLabel="Tolérence"></ext:TextField>
-                                    <ext:TextField runat="server" ID="trajet" AllowBlank="false" FieldLabel="Trajet" Hidden="false"></ext:TextField>
+                                    <ext:TimeField ID="HA" runat="server" FieldLabel="Heure d'Arivée" MinTime="9:00" MaxTime="18:00" Increment="30" Format="H:mm" />
+                                    <ext:TextField runat="server" ID="txtBoxTolerence" FieldLabel="Tolérence"></ext:TextField>
+                                    <ext:TextField runat="server" ID="trajet" FieldLabel="Trajet" Hidden="true" Validator="getTrajetFromDb()"></ext:TextField>
+                                    <ext:TextField runat="server" ID="active" FieldLabel="active" Hidden="true" Text="1"></ext:TextField>
                                 </Items>
                                 <Items>
                                     <ext:Button runat="server" Type="Submit" ID="btnOK" Text="Valider" Icon="Accept" Margin="10" OnDirectClick="Button1Click">
@@ -103,7 +106,7 @@
                                                 <ext:ModelField Name="dateDepart" Type="Date" />
                                                 <ext:ModelField Name="dateArivee" Type="Date" />
                                             </Fields>
-                                        </ext:Model>
+                                        </ext:Model>    
                                     </Model>
                                 </ext:Store>
                             </Store>
@@ -111,16 +114,21 @@
                                 <Columns>
                                     <ext:Column runat="server" Text="Id" Sortable="true" DataIndex="Id" />
                                     <ext:Column runat="server" Text="Véhicule" Sortable="true" DataIndex="vehicule" Flex="1" />
-                                    <ext:DateColumn runat="server" Text="Date De Départ" Sortable="true" DataIndex="dateDepart" Format="yyyy-MM-dd" Flex="1"/>
-                                    <ext:DateColumn runat="server" Text="Date d'Arivée" Sortable="true" DataIndex="dateArivee" Format="yyyy-MM-dd" Flex="1"/>
+                                    <ext:DateColumn runat="server" Text="Date De Départ" Sortable="true" DataIndex="dateDepart" Format="yyyy-MM-dd hh:mm tt" Flex="1"/>
+                                    <ext:DateColumn runat="server" Text="Date d'Arivée" Sortable="true" DataIndex="dateArivee" Format="yyyy-MM-dd hh:mm tt" Flex="1"/>
                                     <ext:ImageCommandColumn runat="server" Width="30" Sortable="false">
                                         <Commands>
-                                            <ext:ImageCommand Icon="Decline" ToolTip-Text="Delete Plant" CommandName="delete">                            
+                                            <ext:ImageCommand Icon="Decline" ToolTip-Text="Delete Plant" CommandName="delete">
                                             </ext:ImageCommand>
                                         </Commands>
-                                        <Listeners>
-                                            <Command Handler="this.up('gridpanel').store.removeAt(recordIndex);" />
-                                        </Listeners>
+                                        <DirectEvents>
+                                            <Command OnEvent="deleteRow" Buffer="250">
+                                                <EventMask ShowMask="false" Target="CustomTarget" CustomTarget="#{frmInfo}" />
+                                                <ExtraParams>
+                                                    <ext:Parameter Name="Id" Value="record.getId()" Mode="Raw" />
+                                                </ExtraParams>
+                                            </Command>
+                                        </DirectEvents>
                                     </ext:ImageCommandColumn>
                                 </Columns>
                             </ColumnModel>

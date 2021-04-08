@@ -154,6 +154,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="App_Readme\Ext.NET\Sample.Web.config" />
+    <Content Include="index.html" />
     <Content Include="PlannificationModel.edmx.sql" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
